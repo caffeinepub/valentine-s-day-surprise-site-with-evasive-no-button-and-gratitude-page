@@ -1,0 +1,61 @@
+{
+  "kind": "build_request",
+  "title": "Retry build/deployment after previous technical error",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-11",
+      "text": "Retry the full build and deployment of the current application to the Internet Computer, using the existing codebase and assets without introducing new product features.",
+      "target": "unknown",
+      "source": {
+        "messageIds": [
+          "msg-1",
+          "msg-2",
+          "msg-3"
+        ],
+        "quotes": [
+          "Deployment error",
+          "Retry it"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A new build is executed end-to-end (frontend build + canister build) and a deployment attempt is made.",
+        "If the retry succeeds, the deployed app loads and the existing Landing -> Gratitude flow works as currently implemented.",
+        "No functional changes are introduced solely as part of the retry if the build/deploy succeeds."
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "If the retry fails again, capture and include the complete build/deployment error output and apply the minimal necessary fixes (code/config/asset path issues) to make the deployment succeed, without changing user-facing behavior.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1",
+          "msg-2",
+          "msg-3"
+        ],
+        "quotes": [
+          "Deployment error",
+          "Retry it"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The final output includes the root cause of the failure as evidenced by the build/deploy logs (error message + file/task where it occurred).",
+        "Any applied changes are minimal and directly address the failure; the Valentine-themed UI, evasive No button behavior, and Landing -> Gratitude navigation remain unchanged.",
+        "A subsequent build/deploy succeeds after the fixes."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/src/components/ui or other immutable frontend paths listed in SYSTEM_CONTEXT.",
+    "Respect the single-actor backend architecture (all Motoko logic in backend/main.mo); only add backend migration files if state upgrades are required."
+  ],
+  "nonGoals": [
+    "Adding new pages, new interactions, or changing existing copy/visual design beyond what is required to fix the deployment.",
+    "Introducing new backend features or persistence unrelated to resolving the build/deployment failure."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

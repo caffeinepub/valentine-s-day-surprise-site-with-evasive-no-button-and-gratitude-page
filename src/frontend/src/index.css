@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 1.5rem;
+        /* Valentine's Day Theme - Light Mode */
+        --background: 0.98 0.015 15;  /* Soft cream/pink */
+        --foreground: 0.25 0.08 15;   /* Deep rose-brown */
+        --card: 1 0.01 15;
+        --card-foreground: 0.25 0.08 15;
+        --popover: 1 0.01 15;
+        --popover-foreground: 0.25 0.08 15;
+        --primary: 0.55 0.22 15;      /* Rich romantic red */
+        --primary-foreground: 0.98 0.01 15;
+        --secondary: 0.92 0.05 340;   /* Soft pink */
+        --secondary-foreground: 0.35 0.08 15;
+        --muted: 0.95 0.02 15;
+        --muted-foreground: 0.50 0.05 15;
+        --accent: 0.88 0.12 340;      /* Vibrant pink accent */
+        --accent-foreground: 0.25 0.08 15;
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.985 0 0;
+        --border: 0.90 0.03 340;
+        --input: 0.90 0.03 340;
+        --ring: 0.55 0.22 15;
+        --chart-1: 0.646 0.222 41.116;
+        --chart-2: 0.6 0.118 184.704;
+        --chart-3: 0.398 0.07 227.392;
+        --chart-4: 0.828 0.189 84.429;
+        --chart-5: 0.769 0.188 70.08;
+    }
+
+    .dark {
+        --background: 0.18 0.05 15;   /* Deep romantic burgundy */
+        --foreground: 0.95 0.02 340;  /* Soft pink-white */
+        --card: 0.22 0.06 15;
+        --card-foreground: 0.95 0.02 340;
+        --popover: 0.25 0.06 15;
+        --popover-foreground: 0.95 0.02 340;
+        --primary: 0.75 0.18 340;     /* Bright romantic pink */
+        --primary-foreground: 0.20 0.06 15;
+        --secondary: 0.30 0.08 15;
+        --secondary-foreground: 0.95 0.02 340;
+        --muted: 0.28 0.06 15;
+        --muted-foreground: 0.65 0.08 340;
+        --accent: 0.65 0.20 340;
+        --accent-foreground: 0.98 0.01 15;
+        --destructive: 0.704 0.191 22.216;
+        --destructive-foreground: 0.98 0.01 15;
+        --border: 0.35 0.08 15;
+        --input: 0.35 0.08 15;
+        --ring: 0.65 0.18 340;
+        --chart-1: 0.488 0.243 264.376;
+        --chart-2: 0.696 0.17 162.48;
+        --chart-3: 0.769 0.188 70.08;
+        --chart-4: 0.627 0.265 303.9;
+        --chart-5: 0.645 0.246 16.439;
+    }
+
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+@layer components {
+    .valentine-gradient {
+        background: linear-gradient(135deg, 
+            oklch(0.98 0.015 15) 0%, 
+            oklch(0.95 0.04 340) 50%, 
+            oklch(0.92 0.06 15) 100%);
+    }
+    
+    .dark .valentine-gradient {
+        background: linear-gradient(135deg, 
+            oklch(0.18 0.05 15) 0%, 
+            oklch(0.22 0.08 340) 50%, 
+            oklch(0.25 0.06 15) 100%);
+    }
+
+    .heart-float {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    .pulse-love {
+        animation: pulse-love 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-love {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+    }
+}

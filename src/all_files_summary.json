@@ -1,0 +1,18 @@
+{
+  "backend/main.mo": "Empty Motoko actor with no methods or logic.",
+  "feature_evidence.json": "Feature evidence report describing a deployment retry and listing related files, components, and test IDs.",
+  "frontend-file-summaries.txt": "Text file containing summaries of multiple frontend files and their purposes.",
+  "frontend/BUILD_DEPLOY_RETRY_NOTES.md": "Notes documenting a retry build/deploy attempt, asset verification, commands, and expected outcomes.",
+  "frontend/index.css": "Tailwind base styling with OKLCH color tokens and theme variables for light and dark modes.",
+  "frontend/index.html": "Basic HTML entry file mounting the React app and loading main.tsx.",
+  "frontend/src/App.tsx": "Root component toggling between the landing and gratitude pages based on user interaction.",
+  "frontend/src/components/EvasiveNoButton.tsx": "Component for an evasive No button that relocates randomly within its container on user interaction.",
+  "frontend/src/hooks/useActor.ts": "React hook creating and managing a backend actor instance tied to Internet Identity authentication.",
+  "frontend/src/hooks/useInternetIdentity.ts": "Context and hooks for Internet Identity authentication using AuthClient with login, clear, and status handling.",
+  "frontend/src/index.css": "Tailwind CSS with Valentine-themed OKLCH colors, gradients, and custom animations for hearts and pulsing effects.",
+  "frontend/src/main.tsx": "React entrypoint initializing QueryClient, InternetIdentityProvider, and rendering App.",
+  "frontend/src/pages/GratitudePage.tsx": "Gratitude page displaying themed images, floating heart decorations, and a romantic message.",
+  "frontend/src/pages/LandingPage.tsx": "React landing page showing themed images, animated hearts, a Yes button triggering navigation, and an evasive No button.",
+  "frontend/tailwind.config.js": "Tailwind CSS config extending typography, colors, shadows, animations, and plugins for the Valentine-themed UI.",
+  "project_state.json": "Project state file describing requirements, features, issues, and build context for the Valentine’s website."
+}

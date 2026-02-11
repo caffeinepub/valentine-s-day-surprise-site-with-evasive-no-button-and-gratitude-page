@@ -1,0 +1,23 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-retry-the-full-build-and-deployment-of-the-current-application-to-the-internet-computer-using-the-existing-codebase-and-assets-without-introducing-new-product-features",
+      "featureTitle": "Retry the full build and deployment of the current application to the Internet Computer, using the existing codebase and assets without introducing new product features.",
+      "files": [
+        "frontend/BUILD_DEPLOY_RETRY_NOTES.md"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

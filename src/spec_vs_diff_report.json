@@ -1,0 +1,48 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-11T06:25:48.809Z",
+  "summary": "The diff mainly adds a retry notes markdown file and updates project metadata/summaries. It does not provide evidence of an actual end-to-end build/deploy retry, nor does it include build/deploy logs or minimal code/config fixes tied to a captured failure root cause.",
+  "missing_requirements": [
+    {
+      "id": "REQ-11",
+      "requirement": "Retry the full build and deployment to the Internet Computer (frontend build + canister build) and attempt deployment without introducing new product features.",
+      "reason": "The diff contains only documentation/metadata updates; there is no evidence of a build/deploy being executed or a deployment attempt succeeding (e.g., CI output, scripts/config changes enabling deploy, or any resulting artifacts).",
+      "evidence": [
+        "frontend/BUILD_DEPLOY_RETRY_NOTES.md",
+        "frontend-file-summaries.txt"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "requirement": "If the retry fails, include the complete build/deploy error output, identify the root cause (error message + file/task), and apply minimal necessary fixes so a subsequent build/deploy succeeds without changing user-facing behavior.",
+      "reason": "No build/deployment error output is captured in the diff, and no minimal fix tied to a specific logged failure is shown. The added notes file states 'No frontend code changes required' but does not include any failure logs or root-cause evidence.",
+      "evidence": [
+        "frontend/BUILD_DEPLOY_RETRY_NOTES.md"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Added build/deploy retry documentation file describing app behavior, assets, and expected outcomes (including items like OKLCH light/dark mode support and footer UTM tracking) without accompanying build/deploy logs or required fixes.",
+      "reason": "The BuildRequest focuses on retrying build/deploy and, if failing, capturing complete error logs and applying minimal fixes. The added narrative documentation and additional asserted app details are not requested deliverables and do not satisfy the log/root-cause requirement.",
+      "evidence": [
+        "frontend/BUILD_DEPLOY_RETRY_NOTES.md"
+      ]
+    },
+    {
+      "description": "Updated project metadata/summaries (frontend-file-summaries.txt and project_state.json) unrelated to executing a deployment retry or fixing a specific build/deploy failure.",
+      "reason": "These changes do not appear required to retry deployment or address a logged technical error per REQ-11/REQ-12, based on the provided diff summary.",
+      "evidence": [
+        "frontend-file-summaries.txt",
+        "project_state.json"
+      ]
+    }
+  ],
+  "confidence": 0.78,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/BUILD_DEPLOY_RETRY_NOTES.md",
+    "project_state.json"
+  ]
+}

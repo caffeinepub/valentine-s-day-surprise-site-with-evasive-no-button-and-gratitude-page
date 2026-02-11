@@ -1,2 +1,3 @@
-# valentine-s-day-surprise-site-with-evasive-no-button-and-gratitude-page
-Exported from Caffeine project: Valentine’s Day surprise site with evasive “No” button and gratitude page
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`
