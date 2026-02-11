@@ -1,9 +1,9 @@
 {
   "frontend/src/index.css": "Global styles with Valentine's Day themed OKLCH color system (romantic reds, pinks, cream tones), custom animations for floating hearts and pulsing effects, and gradient backgrounds for both light and dark modes.",
   "frontend/tailwind.config.js": "Tailwind configuration extended with custom font families (display serif for romantic headings), Valentine-themed color tokens, custom box shadows (love-themed), and increased border radius for softer, more romantic UI elements.",
-  "frontend/src/App.tsx": "Main application component managing navigation state between the landing page and gratitude page, rendering the appropriate view based on user interaction with the Yes button.",
-  "frontend/src/pages/LandingPage.tsx": "Landing page displaying the uploaded person-with-flowers image, \"WILL YOU ACCEPT MY LOVE\" text with decorative floating hearts, the heart doodle image, a stationary Yes button, and the evasive No button positioned in a relative container.",
-  "frontend/src/pages/GratitudePage.tsx": "Gratitude page shown after clicking Yes, featuring the uploaded couple illustration image at the top, followed by a heartfelt love message with multiple paragraphs expressing appreciation, decorated with floating hearts, sparkles, the heart doodle image, and footer with attribution.",
+  "frontend/src/App.tsx": "Main application component managing navigation state between landing and gratitude pages, with the valentine-gradient background removed to allow page-specific backgrounds.",
+  "frontend/src/pages/LandingPage.tsx": "Landing page with the person-with-flowers image as a full-viewport background, featuring the \"WILL YOU ACCEPT MY LOVE\" text, heart doodle, Yes button, and evasive No button with proper z-index stacking and a semi-transparent overlay for readability.",
+  "frontend/src/pages/GratitudePage.tsx": "Gratitude page with the couple illustration as a full-viewport background, displaying a heartfelt love message with decorative elements, proper z-index stacking, and a semi-transparent overlay for text readability.",
   "frontend/src/components/EvasiveNoButton.tsx": "Interactive button component that repositions itself to random coordinates within its container bounds whenever the user attempts to hover, click, or touch it, ensuring it remains fully visible and in-bounds.",
   "frontend/BUILD_DEPLOY_RETRY_NOTES.md": "Documentation file recording the retry build/deploy attempt metadata, asset verification checklist, and expected deployment outcomes without altering application behavior."
 }

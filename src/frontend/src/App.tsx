@@ -10,7 +10,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen valentine-gradient">
+    <div className="min-h-screen">
       {!showGratitude ? (
         <LandingPage onYesClick={handleYesClick} />
       ) : (

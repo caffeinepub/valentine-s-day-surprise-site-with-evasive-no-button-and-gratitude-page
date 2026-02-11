@@ -1,58 +1,55 @@
 {
   "kind": "build_request",
-  "title": "Retry build/deployment after previous technical error",
+  "title": "Use uploaded images as full-page backgrounds on Landing and Gratitude pages",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-11",
-      "text": "Retry the full build and deployment of the current application to the Internet Computer, using the existing codebase and assets without introducing new product features.",
-      "target": "unknown",
+      "id": "REQ-13",
+      "text": "Update the Landing page so the uploaded image at `/assets/3a6059bf59d32f6f27e0496b5424853a.jpg` is used as a full-page background image behind all existing content (not just rendered as an inline image). The background must cover the viewport (CSS cover/center), remain fixed behind the UI layer, and must not break the Yes/No button layout or the evasive behavior of the No button.",
+      "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1",
-          "msg-2",
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "Deployment error",
-          "Retry it"
+          "No I need the uploaded images as background images"
         ]
       },
       "acceptanceCriteria": [
-        "A new build is executed end-to-end (frontend build + canister build) and a deployment attempt is made.",
-        "If the retry succeeds, the deployed app loads and the existing Landing -> Gratitude flow works as currently implemented.",
-        "No functional changes are introduced solely as part of the retry if the build/deploy succeeds."
+        "On the Landing page, the visible page background uses `/assets/3a6059bf59d32f6f27e0496b5424853a.jpg` and fills the viewport using cover/center styling.",
+        "All existing Landing page foreground UI remains visible above the background (proper stacking via z-index / positioning).",
+        "The No button remains fully interactive and continues to evade on hover/mousedown/touchstart without being blocked by the background layer.",
+        "The Yes button still works and still navigates to the Gratitude page."
       ]
     },
     {
-      "id": "REQ-12",
-      "text": "If the retry fails again, capture and include the complete build/deployment error output and apply the minimal necessary fixes (code/config/asset path issues) to make the deployment succeed, without changing user-facing behavior.",
-      "target": "both",
+      "id": "REQ-14",
+      "text": "Update the Gratitude page so the uploaded image at `/assets/2fe29e3f61a6e53093c503c181238cdc.jpg` is used as a full-page background image behind all existing content. The background must cover the viewport (CSS cover/center) and remain behind the page content without reducing readability or breaking layout.",
+      "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1",
-          "msg-2",
-          "msg-3"
+          "msg-4"
         ],
         "quotes": [
-          "Deployment error",
-          "Retry it"
+          "No I need the uploaded images as background images"
         ]
       },
       "acceptanceCriteria": [
-        "The final output includes the root cause of the failure as evidenced by the build/deploy logs (error message + file/task where it occurred).",
-        "Any applied changes are minimal and directly address the failure; the Valentine-themed UI, evasive No button behavior, and Landing -> Gratitude navigation remain unchanged.",
-        "A subsequent build/deploy succeeds after the fixes."
+        "On the Gratitude page, the visible page background uses `/assets/2fe29e3f61a6e53093c503c181238cdc.jpg` and fills the viewport using cover/center styling.",
+        "All existing Gratitude page content renders above the background and remains readable (e.g., via existing styling or a subtle overlay if needed).",
+        "No changes break navigation flow (Landing → Gratitude)."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui or other immutable frontend paths listed in SYSTEM_CONTEXT.",
-    "Respect the single-actor backend architecture (all Motoko logic in backend/main.mo); only add backend migration files if state upgrades are required."
+    "Do not edit any files under `frontend/src/components/ui` (read-only).",
+    "Do not change the backend (Motoko) behavior or require backend image serving; all images must be loaded as static frontend assets via `/assets/...`.",
+    "Keep the existing Yes/No interaction behavior and page navigation intact."
   ],
   "nonGoals": [
-    "Adding new pages, new interactions, or changing existing copy/visual design beyond what is required to fix the deployment.",
-    "Introducing new backend features or persistence unrelated to resolving the build/deployment failure."
+    "Adding new pages or new user flows.",
+    "Introducing new image assets beyond the already-uploaded background images.",
+    "Implementing authentication, persistence, or any backend functionality."
   ],
   "imageRequirements": {
     "required": [],

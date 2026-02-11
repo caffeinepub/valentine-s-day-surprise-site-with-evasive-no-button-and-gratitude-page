@@ -1,12 +1,13 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 9,
+  "projectStateVersion": 11,
   "summary": "Valentine’s Day surprise website with a landing page asking “WILL YOU BE MY VALENTINE”, Yes/No buttons (with the No button evasive on hover/touch), and a follow-up gratitude page shown after clicking Yes; both pages should use the provided images as full-page backgrounds.",
   "architectural_notes": [
     "Use the uploaded images as CSS full-page backgrounds on both pages (cover/center, behind content) while preserving button interactions and readability."
   ],
   "known_issues": [
-    "Deployment/build encountered a technical error; user requested a retry."
+    "Deployment/build encountered a technical error; user requested a retry.",
+    "Deployed version does not use the uploaded images as full-page background images as required."
   ],
   "isFixRequest": true,
   "existing_features": [
@@ -95,6 +96,22 @@
       "title": "Retry the full build and deployment of the current application to the Internet Computer, using the existing codebase and assets without introducing new product features.",
       "reqIds": [
         "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-landing-page-so-the-uploaded-image-at-assets-3a6059bf59d32f6f27e0496b5424853a-jpg-is-used-as-a-full-page-background-image-behind-all-existing-content-not-just-rendered-as-an-inline-image-the-background-must-cover-the-viewport-css-cover-center-remain-fixed-behind-the-ui-layer-and-must-not-break-the-yes-no-button-layout-or-the-evasive-behavior-of-the-no-button",
+      "title": "Update the Landing page so the uploaded image at `/assets/3a6059bf59d32f6f27e0496b5424853a.jpg` is used as a full-page background image behind all existing content (not just rendered as an inline image). The background must cover the viewport (CSS cover/center), remain fixed behind the UI layer, and must not break the Yes/No button layout or the evasive behavior of the No button.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-gratitude-page-so-the-uploaded-image-at-assets-2fe29e3f61a6e53093c503c181238cdc-jpg-is-used-as-a-full-page-background-image-behind-all-existing-content-the-background-must-cover-the-viewport-css-cover-center-and-remain-behind-the-page-content-without-reducing-readability-or-breaking-layout",
+      "title": "Update the Gratitude page so the uploaded image at `/assets/2fe29e3f61a6e53093c503c181238cdc.jpg` is used as a full-page background image behind all existing content. The background must cover the viewport (CSS cover/center) and remain behind the page content without reducing readability or breaking layout.",
+      "reqIds": [
+        "REQ-14"
       ],
       "version": 1
     }

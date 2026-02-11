@@ -1,41 +1,38 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-11T06:25:48.812Z",
+  "generatedAt": "2026-02-11T06:30:13.223Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
     "total": 2,
-    "implemented": 1,
+    "implemented": 2,
     "items": [
       {
-        "id": "REQ-11",
-        "summary": "Retry the full build and deployment of the current application to the Internet Computer, using the existing codebase and assets without introducing new product features.",
+        "id": "REQ-13",
+        "summary": "Update the Landing page so the uploaded image at `/assets/3a6059bf59d32f6f27e0496b5424853a.jpg` is used as a full-page background image behind all existing content (not just rendered as an inline image). The background must cover the viewport (CSS cover/center), remain fixed behind the UI layer, and must not break the Yes/No button layout or the evasive behavior of the No button.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/2fe29e3f61a6e53093c503c181238cdc.jpg",
-          "frontend/public/assets/3a6059bf59d32f6f27e0496b5424853a.jpg",
-          "frontend/public/assets/generated/heart-doodle.dim_512x512.png",
-          "frontend/public/assets/generated/valentine-bg-pattern.dim_1920x1080.png",
-          "frontend/BUILD_DEPLOY_RETRY_NOTES.md"
+          "frontend/src/pages/LandingPage.tsx",
+          "frontend/src/App.tsx"
         ],
         "matchedFiles": [
-          "frontend/BUILD_DEPLOY_RETRY_NOTES.md"
+          "frontend/src/pages/LandingPage.tsx",
+          "frontend/src/App.tsx"
         ]
       },
       {
-        "id": "REQ-12",
-        "summary": "If the retry fails again, capture and include the complete build/deployment error output and apply the minimal necessary fixes (code/config/asset path issues) to make the deployment succeed, without changing user-facing behavior.",
-        "status": "missing",
+        "id": "REQ-14",
+        "summary": "Update the Gratitude page so the uploaded image at `/assets/2fe29e3f61a6e53093c503c181238cdc.jpg` is used as a full-page background image behind all existing content. The background must cover the viewport (CSS cover/center) and remain behind the page content without reducing readability or breaking layout.",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/BUILD_DEPLOY_ERROR_LOG.txt",
-          "frontend/src/pages/LandingPage.tsx",
-          "frontend/src/pages/GratitudePage.tsx",
-          "frontend/index.html"
+          "frontend/src/pages/GratitudePage.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/pages/GratitudePage.tsx"
+        ]
       }
     ]
   },
@@ -44,7 +41,9 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/BUILD_DEPLOY_RETRY_NOTES.md",
+    "frontend/src/App.tsx",
+    "frontend/src/pages/GratitudePage.tsx",
+    "frontend/src/pages/LandingPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

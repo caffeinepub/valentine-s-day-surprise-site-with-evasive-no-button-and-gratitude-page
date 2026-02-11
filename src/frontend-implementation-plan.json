@@ -1,72 +1,43 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Retry IC build/deploy and apply minimal frontend-only fixes if needed",
+  "title": "Set uploaded images as full-page backgrounds for Landing and Gratitude pages",
   "requirements": [
     {
-      "id": "REQ-11",
-      "summary": "Prepare the existing frontend for a clean rebuild/redeploy without changing app behavior (Landing -> Gratitude flow remains identical).",
+      "id": "REQ-13",
+      "summary": "Use the uploaded Landing image as a fixed, full-viewport background behind all existing Landing content without affecting Yes/No interactions.",
       "acceptanceCriteria": [
-        "A new build is executed end-to-end (frontend build + canister build) and a deployment attempt is made.",
-        "If the retry succeeds, the deployed app loads and the existing Landing -> Gratitude flow works as currently implemented.",
-        "No functional changes are introduced solely as part of the retry if the build/deploy succeeds."
+        "On the Landing page, the visible page background uses `/assets/3a6059bf59d32f6f27e0496b5424853a.jpg` and fills the viewport using cover/center styling.",
+        "All existing Landing page foreground UI remains visible above the background (proper stacking via z-index / positioning).",
+        "The No button remains fully interactive and continues to evade on hover/mousedown/touchstart without being blocked by the background layer.",
+        "The Yes button still works and still navigates to the Gratitude page."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/2fe29e3f61a6e53093c503c181238cdc.jpg",
-          "operation": "create",
-          "description": "Ensure the existing gratitude-page illustration asset is present under the public assets path expected by runtime references (/assets/...). No behavioral/UI changes; this is a packaging fix for build/deploy reliability."
+          "path": "frontend/src/pages/LandingPage.tsx",
+          "operation": "modify",
+          "description": "Replace the current inline rendering of `/assets/3a6059bf59d32f6f27e0496b5424853a.jpg` with a full-page background layer using that same static asset. Implement as a fixed/absolute background element behind all content (cover/center), ensure correct stacking (foreground above via z-index) and ensure the background layer cannot intercept pointer events so the EvasiveNoButton remains fully interactive."
         },
         {
-          "path": "frontend/public/assets/3a6059bf59d32f6f27e0496b5424853a.jpg",
-          "operation": "create",
-          "description": "Ensure the existing landing-page photo asset is present under the public assets path expected by runtime references (/assets/...). No behavioral/UI changes; this is a packaging fix for build/deploy reliability."
-        },
-        {
-          "path": "frontend/public/assets/generated/heart-doodle.dim_512x512.png",
-          "operation": "create",
-          "description": "Ensure the generated heart doodle image exists at the exact public path referenced by the UI (/assets/generated/heart-doodle.dim_512x512.png). No behavioral/UI changes; packaging fix only."
-        },
-        {
-          "path": "frontend/public/assets/generated/valentine-bg-pattern.dim_1920x1080.png",
-          "operation": "create",
-          "description": "Ensure the generated background pattern image exists at the exact public path referenced by the UI (/assets/generated/valentine-bg-pattern.dim_1920x1080.png). No behavioral/UI changes; packaging fix only."
-        },
-        {
-          "path": "frontend/BUILD_DEPLOY_RETRY_NOTES.md",
-          "operation": "create",
-          "description": "Add a lightweight, non-user-facing note file to record the retry build/deploy attempt metadata (commands used, timestamps, and success/failure), without altering application behavior."
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Adjust the root wrapper styling so it does not visually override page-specific full-page background images (e.g., remove/neutralize the `valentine-gradient` background on the app shell while keeping the existing Landing → Gratitude navigation logic unchanged)."
         }
       ]
     },
     {
-      "id": "REQ-12",
-      "summary": "If retry fails, record full error output and apply minimal frontend-only fixes (config/asset path/build issues) that do not change user-facing behavior.",
+      "id": "REQ-14",
+      "summary": "Use the uploaded Gratitude image as a full-viewport background behind Gratitude content while preserving readability and layout.",
       "acceptanceCriteria": [
-        "The final output includes the root cause of the failure as evidenced by the build/deploy logs (error message + file/task where it occurred).",
-        "Any applied changes are minimal and directly address the failure; the Valentine-themed UI, evasive No button behavior, and Landing -> Gratitude navigation remain unchanged.",
-        "A subsequent build/deploy succeeds after the fixes."
+        "On the Gratitude page, the visible page background uses `/assets/2fe29e3f61a6e53093c503c181238cdc.jpg` and fills the viewport using cover/center styling.",
+        "All existing Gratitude page content renders above the background and remains readable (e.g., via existing styling or a subtle overlay if needed).",
+        "No changes break navigation flow (Landing → Gratitude)."
       ],
       "file_operations": [
         {
-          "path": "frontend/BUILD_DEPLOY_ERROR_LOG.txt",
-          "operation": "create",
-          "description": "Capture and commit the complete build/deploy error output here if the retry fails again (include the error message and the failing file/task), to document root cause and validation for minimal fixes."
-        },
-        {
-          "path": "frontend/src/pages/LandingPage.tsx",
-          "operation": "modify",
-          "description": "If logs show a static-asset base path issue, apply the minimal adjustment to make asset URL construction robust in IC deployment (e.g., respect the app base path) while keeping visuals/copy/layout and interactions unchanged."
-        },
-        {
           "path": "frontend/src/pages/GratitudePage.tsx",
           "operation": "modify",
-          "description": "If logs show a static-asset base path issue, apply the minimal adjustment to make asset URL construction robust in IC deployment (e.g., respect the app base path) while keeping visuals/copy/layout and interactions unchanged."
-        },
-        {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "If logs indicate HTML entry/build tool expectations mismatch (e.g., asset/base script path), apply the smallest configuration-safe tweak required for the build to succeed, without changing the rendered UI or navigation flow."
+          "description": "Replace the current inline rendering of `/assets/2fe29e3f61a6e53093c503c181238cdc.jpg` with a full-page background layer using that static asset (cover/center). Ensure the background stays behind all content via z-index/positioning, and add/adjust a subtle non-interactive overlay layer if needed to maintain text readability without changing the page layout."
         }
       ]
     }
