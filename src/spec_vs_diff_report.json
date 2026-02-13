@@ -1,16 +1,57 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-11T06:30:13.219Z",
-  "summary": "REQ-13 and REQ-14 appear implemented: both Landing and Gratitude pages now render the specified /assets/*.jpg files as fixed, full-viewport background layers using cover/center styling with foreground content stacked above and pointer-events disabled on the background layers; navigation via Yes click remains in App.tsx.",
-  "missing_requirements": [],
-  "hallucinated_features": [],
-  "confidence": 0.86,
+  "generatedAt": "2026-02-13T16:34:44.129Z",
+  "summary": "REQ-2 is implemented via a new Next button on ReplyPage and state-based navigation in App to a new FarewellPage. REQ-1 is mostly implemented (click-to-edit, focus, saving via useReplyPersistence.save, disabled/loading while saving, exit edit mode), but the Save button is only rendered while editing rather than being always present at the bottom of the reply box. REQ-3 is mostly implemented (new FarewellPage, exact-looking message, kissing emoji overlay hidden after 5 seconds), but the rendered message may not be exactly identical due to the missing leading space shown in the requirement’s quoted text. Several unrequested visual/theme changes and footer branding were also added.",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "A Save button is rendered at the bottom/end of the reply box container (visually attached to the reply box section).",
+      "reason": "In the diff, the Save button is conditionally rendered only when `isEditing` is true; the requirement/AC indicates the Save button should be rendered at the bottom/end of the reply box (not only during edit mode).",
+      "evidence": [
+        "frontend/src/pages/ReplyPage.tsx"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "The fourth page renders the provided parting message exactly as given (including punctuation and emojis).",
+      "reason": "The requirement shows the message string starting with a leading space after the opening quote (\" Bye ...\"), but the FarewellPage renders it without that leading space (\"Bye ...\"). This may violate the 'exactly as given' constraint.",
+      "evidence": [
+        "frontend/src/pages/FarewellPage.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Added a new branded footer on the new Farewell page with a dynamic year, a lucide Heart icon, and an external caffeine.ai link.",
+      "reason": "REQ-3 only asked for the exact parting message and a 5-second kissing animation; it did not request new branding, icons, or external links.",
+      "evidence": [
+        "frontend/src/pages/FarewellPage.tsx"
+      ]
+    },
+    {
+      "description": "Introduced broad Valentine's-themed global styling changes (OKLCH theme tokens, gradients, multiple animations beyond the 5-second kissing animation).",
+      "reason": "The BuildRequest only required ReplyPage edit/save/next behavior and a 5-second kissing animation on the new page; global theme/animation expansions were not requested.",
+      "evidence": [
+        "frontend/src/index.css",
+        "frontend-file-summaries.txt"
+      ]
+    },
+    {
+      "description": "Modified/extended Tailwind configuration with custom fonts, shadows, and theme tokens.",
+      "reason": "Not requested by any of REQ-1/REQ-2/REQ-3; only functional UI behavior and one new page/animation were requested.",
+      "evidence": [
+        "frontend-file-summaries.txt"
+      ]
+    }
+  ],
+  "confidence": 0.72,
   "changed_files": [
     "frontend-file-summaries.txt",
     "frontend/src/App.tsx",
-    "frontend/src/pages/GratitudePage.tsx",
-    "frontend/src/pages/LandingPage.tsx",
+    "frontend/src/index.css",
+    "frontend/src/pages/FarewellPage.tsx",
+    "frontend/src/pages/ReplyPage.tsx",
     "project_state.json"
   ]
 }

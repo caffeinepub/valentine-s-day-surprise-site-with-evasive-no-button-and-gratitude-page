@@ -1,6 +1,11 @@
-import { Heart, Sparkles } from 'lucide-react';
+import { Heart, Sparkles, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
-export default function GratitudePage() {
+interface GratitudePageProps {
+  onNextClick: () => void;
+}
+
+export default function GratitudePage({ onNextClick }: GratitudePageProps) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -66,17 +71,7 @@ export default function GratitudePage() {
           {/* Gratitude message */}
           <div className="space-y-6 max-w-2xl mx-auto">
             <p className="text-lg md:text-xl lg:text-2xl text-foreground leading-relaxed font-light drop-shadow">
-              From the moment I met you, my world became brighter. Your smile lights up my darkest days, 
-              and your laughter is my favorite melody.
-            </p>
-            
-            <p className="text-lg md:text-xl lg:text-2xl text-foreground leading-relaxed font-light drop-shadow">
-              Thank you for being the most amazing person in my life. Every moment with you is a treasure, 
-              and I'm so grateful that you've chosen to share your heart with me.
-            </p>
-
-            <p className="text-lg md:text-xl lg:text-2xl text-foreground leading-relaxed font-light drop-shadow">
-              You are my today and all of my tomorrows. I love you more than words can express.
+              THANKS FOR COMING INTO MY LIFE DII 🥰. YOU ARE THE MISSING PART OF MY LIFE I NEEDED .... WE HAD BEST MOMENTS EVER IN COUPLES OF WEEKS AGO ... I REALLY ENJOYED AND ITS ONE OF  MY HAPPIEST DAY IN MY LIFE ... WE MIGHT BE APART IN THIS YEAR ... LET'S ENJOY IT TOGETHER IN NEXT YEAR....  I LOVE YOU DII THANGOO PULLA 😚😘....WISH YOU ALL THE BEST FOR YOUR EXAM DII PAPA ☺️
             </p>
           </div>
 
@@ -95,6 +90,18 @@ export default function GratitudePage() {
             <p className="text-2xl md:text-3xl font-display font-semibold text-primary mt-2 drop-shadow">
               Your Valentine 💕
             </p>
+          </div>
+
+          {/* Next button */}
+          <div className="flex justify-center pt-8">
+            <Button
+              onClick={onNextClick}
+              size="lg"
+              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold shadow-lg"
+            >
+              Next
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
           </div>
         </div>
       </main>

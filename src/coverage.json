@@ -1,37 +1,53 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-11T06:30:13.223Z",
+  "generatedAt": "2026-02-13T16:34:44.132Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 2,
-    "implemented": 2,
+    "total": 3,
+    "implemented": 3,
     "items": [
       {
-        "id": "REQ-13",
-        "summary": "Update the Landing page so the uploaded image at `/assets/3a6059bf59d32f6f27e0496b5424853a.jpg` is used as a full-page background image behind all existing content (not just rendered as an inline image). The background must cover the viewport (CSS cover/center), remain fixed behind the UI layer, and must not break the Yes/No button layout or the evasive behavior of the No button.",
+        "id": "REQ-1",
+        "summary": "Update the third page (ReplyPage) reply box so the user can edit the reply content by tapping/clicking the content (in-place edit) and can save it using a Save button placed at the end (bottom) of the reply box.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/LandingPage.tsx",
+          "frontend/src/pages/ReplyPage.tsx",
+          "frontend/src/hooks/useReplyPersistence.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/ReplyPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Add a Next button on the third page (ReplyPage) that navigates to a new fourth page.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/ReplyPage.tsx",
           "frontend/src/App.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/LandingPage.tsx",
+          "frontend/src/pages/ReplyPage.tsx",
           "frontend/src/App.tsx"
         ]
       },
       {
-        "id": "REQ-14",
-        "summary": "Update the Gratitude page so the uploaded image at `/assets/2fe29e3f61a6e53093c503c181238cdc.jpg` is used as a full-page background image behind all existing content. The background must cover the viewport (CSS cover/center) and remain behind the page content without reducing readability or breaking layout.",
+        "id": "REQ-3",
+        "summary": "Create a fourth page that displays the provided parting message exactly as given by the user, and play a kissing animation automatically when the page is opened that lasts 5 seconds.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/GratitudePage.tsx"
+          "frontend/src/pages/FarewellPage.tsx",
+          "frontend/src/index.css",
+          "frontend/src/App.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/GratitudePage.tsx"
+          "frontend/src/pages/FarewellPage.tsx",
+          "frontend/src/index.css",
+          "frontend/src/App.tsx"
         ]
       }
     ]
@@ -42,8 +58,9 @@
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
     "frontend/src/App.tsx",
-    "frontend/src/pages/GratitudePage.tsx",
-    "frontend/src/pages/LandingPage.tsx",
+    "frontend/src/index.css",
+    "frontend/src/pages/FarewellPage.tsx",
+    "frontend/src/pages/ReplyPage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

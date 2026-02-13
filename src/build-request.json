@@ -1,55 +1,76 @@
 {
   "kind": "build_request",
-  "title": "Use uploaded images as full-page backgrounds on Landing and Gratitude pages",
+  "title": "Add editable reply with Save button, add Farewell page with 5-second kissing animation",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-13",
-      "text": "Update the Landing page so the uploaded image at `/assets/3a6059bf59d32f6f27e0496b5424853a.jpg` is used as a full-page background image behind all existing content (not just rendered as an inline image). The background must cover the viewport (CSS cover/center), remain fixed behind the UI layer, and must not break the Yes/No button layout or the evasive behavior of the No button.",
+      "id": "REQ-1",
+      "text": "Update the third page (ReplyPage) reply box so the user can edit the reply content by tapping/clicking the content (in-place edit) and can save it using a Save button placed at the end (bottom) of the reply box.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-4"
         ],
         "quotes": [
-          "No I need the uploaded images as background images"
+          "Add the save button at the end of reply box it can save and it can simply edit with touching the content ."
         ]
       },
       "acceptanceCriteria": [
-        "On the Landing page, the visible page background uses `/assets/3a6059bf59d32f6f27e0496b5424853a.jpg` and fills the viewport using cover/center styling.",
-        "All existing Landing page foreground UI remains visible above the background (proper stacking via z-index / positioning).",
-        "The No button remains fully interactive and continues to evade on hover/mousedown/touchstart without being blocked by the background layer.",
-        "The Yes button still works and still navigates to the Gratitude page."
+        "When the ReplyPage loads, it shows the currently saved reply content (same source as today: useReplyPersistence loadedReply).",
+        "Tapping/clicking inside the reply content switches the reply box into an editable state (the textarea becomes editable and focus is placed in it).",
+        "A Save button is rendered at the bottom/end of the reply box container (visually attached to the reply box section).",
+        "Clicking Save persists the edited text using the existing reply persistence hook (submitReply via useReplyPersistence.save).",
+        "While saving, the Save button shows a disabled/loading state (uses isSaving).",
+        "After a successful save, the page shows the saved text and exits the editing state (read-only again)."
       ]
     },
     {
-      "id": "REQ-14",
-      "text": "Update the Gratitude page so the uploaded image at `/assets/2fe29e3f61a6e53093c503c181238cdc.jpg` is used as a full-page background image behind all existing content. The background must cover the viewport (CSS cover/center) and remain behind the page content without reducing readability or breaking layout.",
+      "id": "REQ-2",
+      "text": "Add a Next button on the third page (ReplyPage) that navigates to a new fourth page.",
       "target": "frontend",
       "source": {
         "messageIds": [
           "msg-4"
         ],
         "quotes": [
-          "No I need the uploaded images as background images"
+          "Then With another next button in the third page to go fourth page"
         ]
       },
       "acceptanceCriteria": [
-        "On the Gratitude page, the visible page background uses `/assets/2fe29e3f61a6e53093c503c181238cdc.jpg` and fills the viewport using cover/center styling.",
-        "All existing Gratitude page content renders above the background and remains readable (e.g., via existing styling or a subtle overlay if needed).",
-        "No changes break navigation flow (Landing → Gratitude)."
+        "ReplyPage includes a clearly visible Next button in the main content area (below the reply box is acceptable).",
+        "Clicking Next transitions the app from ReplyPage to the new fourth page without a full page reload.",
+        "Existing flow remains intact: LandingPage → Overlay → GratitudePage → ReplyPage, and then the new Next button goes to the fourth page."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Create a fourth page that displays the provided parting message exactly as given by the user, and play a kissing animation automatically when the page is opened that lasts 5 seconds.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "go fourth page with the parting content \" Bye dii papa odamba pathuko,v2ku pathu poitu va , time ku saptu , Thani nariya kudi, amma kuda sanda podatha ,Nalla padi , over time la padikatha ,enndoa thangoo tha batharama pathukoo , LOVE YOU DII PAPA 😘😘😘😘😘😘😘 ,TATA 👋\"and with an kissing animation when the page is opened it should be last 5 second"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A new fourth page component exists and is reachable only after clicking Next on ReplyPage.",
+        "The fourth page renders this message exactly (including punctuation and emojis): \" Bye dii papa odamba pathuko,v2ku pathu poitu va , time ku saptu , Thani nariya kudi, amma kuda sanda podatha ,Nalla padi , over time la padikatha ,enndoa thangoo tha batharama pathukoo , LOVE YOU DII PAPA 😘😘😘😘😘😘😘 ,TATA 👋\"",
+        "On initial render/open of the fourth page, a kissing-themed animation begins automatically and runs for 5 seconds.",
+        "After 5 seconds, the animation ends (or fades out) and does not continuously loop (unless explicitly designed to stop after the 5-second duration)."
       ]
     }
   ],
   "constraints": [
-    "Do not edit any files under `frontend/src/components/ui` (read-only).",
-    "Do not change the backend (Motoko) behavior or require backend image serving; all images must be loaded as static frontend assets via `/assets/...`.",
-    "Keep the existing Yes/No interaction behavior and page navigation intact."
+    "Do not modify files under frontend/src/components/ui (read-only shadcn components).",
+    "Do not edit the immutable hook files listed in SYSTEM_CONTEXT (frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx).",
+    "Keep backend as a single Motoko actor in backend/main.mo; only add a migration if persistent state shape changes (not expected for this request)."
   ],
   "nonGoals": [
-    "Adding new pages or new user flows.",
-    "Introducing new image assets beyond the already-uploaded background images.",
-    "Implementing authentication, persistence, or any backend functionality."
+    "Do not change the existing LandingPage, RomanticNotificationOverlay, or GratitudePage copy/content except for wiring navigation if necessary.",
+    "Do not add third-party authentication providers; use existing Internet Identity integration only.",
+    "Do not introduce external databases or services."
   ],
   "imageRequirements": {
     "required": [],

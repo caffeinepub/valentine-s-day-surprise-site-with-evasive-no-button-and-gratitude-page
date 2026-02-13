@@ -1,43 +1,77 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Set uploaded images as full-page backgrounds for Landing and Gratitude pages",
+  "title": "Editable ReplyPage with Save + Next navigation to Farewell page with 5s kissing animation",
   "requirements": [
     {
-      "id": "REQ-13",
-      "summary": "Use the uploaded Landing image as a fixed, full-viewport background behind all existing Landing content without affecting Yes/No interactions.",
+      "id": "REQ-1",
+      "summary": "Make ReplyPage reply content editable on tap/click and persist changes via a Save button at the bottom of the reply box.",
       "acceptanceCriteria": [
-        "On the Landing page, the visible page background uses `/assets/3a6059bf59d32f6f27e0496b5424853a.jpg` and fills the viewport using cover/center styling.",
-        "All existing Landing page foreground UI remains visible above the background (proper stacking via z-index / positioning).",
-        "The No button remains fully interactive and continues to evade on hover/mousedown/touchstart without being blocked by the background layer.",
-        "The Yes button still works and still navigates to the Gratitude page."
+        "When the ReplyPage loads, it shows the currently saved reply content (same source as today: useReplyPersistence loadedReply).",
+        "Tapping/clicking inside the reply content switches the reply box into an editable state (the textarea becomes editable and focus is placed in it).",
+        "A Save button is rendered at the bottom/end of the reply box container (visually attached to the reply box section).",
+        "Clicking Save persists the edited text using the existing reply persistence hook (submitReply via useReplyPersistence.save).",
+        "While saving, the Save button shows a disabled/loading state (uses isSaving).",
+        "After a successful save, the page shows the saved text and exits the editing state (read-only again)."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/LandingPage.tsx",
+          "path": "frontend/src/pages/ReplyPage.tsx",
           "operation": "modify",
-          "description": "Replace the current inline rendering of `/assets/3a6059bf59d32f6f27e0496b5424853a.jpg` with a full-page background layer using that same static asset. Implement as a fixed/absolute background element behind all content (cover/center), ensure correct stacking (foreground above via z-index) and ensure the background layer cannot intercept pointer events so the EvasiveNoButton remains fully interactive."
+          "description": "Implement in-place editing behavior: click/tap to enter editing mode, focus the textarea, track draft text separate from loadedReply, render a Save button at the bottom of the reply box, and use isSaving to disable/show loading state. Use shadcn-ui Textarea and Button components to provide the reply field and action button; Verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/hooks/useReplyPersistence.ts",
           "operation": "modify",
-          "description": "Adjust the root wrapper styling so it does not visually override page-specific full-page background images (e.g., remove/neutralize the `valentine-gradient` background on the app shell while keeping the existing Landing → Gratitude navigation logic unchanged)."
+          "description": "Extend the existing reply persistence hook to better support ReplyPage save flow (e.g., expose an async save function and/or a way for the page to reliably detect save success) while keeping loadedReply as the source of truth and continuing to invalidate/refetch after saves."
         }
       ]
     },
     {
-      "id": "REQ-14",
-      "summary": "Use the uploaded Gratitude image as a full-viewport background behind Gratitude content while preserving readability and layout.",
+      "id": "REQ-2",
+      "summary": "Add a Next button on ReplyPage that navigates to a new fourth page without reloading.",
       "acceptanceCriteria": [
-        "On the Gratitude page, the visible page background uses `/assets/2fe29e3f61a6e53093c503c181238cdc.jpg` and fills the viewport using cover/center styling.",
-        "All existing Gratitude page content renders above the background and remains readable (e.g., via existing styling or a subtle overlay if needed).",
-        "No changes break navigation flow (Landing → Gratitude)."
+        "ReplyPage includes a clearly visible Next button in the main content area (below the reply box is acceptable).",
+        "Clicking Next transitions the app from ReplyPage to the new fourth page without a full page reload.",
+        "Existing flow remains intact: LandingPage → Overlay → GratitudePage → ReplyPage, and then the new Next button goes to the fourth page."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/GratitudePage.tsx",
+          "path": "frontend/src/pages/ReplyPage.tsx",
           "operation": "modify",
-          "description": "Replace the current inline rendering of `/assets/2fe29e3f61a6e53093c503c181238cdc.jpg` with a full-page background layer using that static asset (cover/center). Ensure the background stays behind all content via z-index/positioning, and add/adjust a subtle non-interactive overlay layer if needed to maintain text readability without changing the page layout."
+          "description": "Add a clearly visible Next button below the reply box and wire it to a new onNextClick prop to transition to the fourth page. Use the shadcn-ui Button component for consistent styling; Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Extend the existing state-based navigation to include a new fourth page and pass an onNextClick handler into ReplyPage so clicking Next switches the view without a full reload."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Create a fourth page that shows the exact farewell message and auto-plays a 5-second kissing-themed animation on open that stops after 5 seconds.",
+      "acceptanceCriteria": [
+        "A new fourth page component exists and is reachable only after clicking Next on ReplyPage.",
+        "The fourth page renders this message exactly (including punctuation and emojis): \" Bye dii papa odamba pathuko,v2ku pathu poitu va , time ku saptu , Thani nariya kudi, amma kuda sanda podatha ,Nalla padi , over time la padikatha ,enndoa thangoo tha batharama pathukoo , LOVE YOU DII PAPA 😘😘😘😘😘😘😘 ,TATA 👋\"",
+        "On initial render/open of the fourth page, a kissing-themed animation begins automatically and runs for 5 seconds.",
+        "After 5 seconds, the animation ends (or fades out) and does not continuously loop (unless explicitly designed to stop after the 5-second duration)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/FarewellPage.tsx",
+          "operation": "create",
+          "description": "Create the new fourth page component that renders the provided farewell message exactly as specified and starts a kissing-themed animation on mount that automatically stops/hides after 5 seconds."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add CSS keyframes/classes to support a kissing-themed animation that runs once (non-looping) and can be shown for 5 seconds on the Farewell page (e.g., floating '😘' elements with fade/scale/float behavior)."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the new FarewellPage into the existing flow so it is reachable only after clicking Next on ReplyPage, preserving the current sequence of pages."
         }
       ]
     }

@@ -46,7 +46,7 @@ export default function LandingPage({ onYesClick }: LandingPageProps) {
         {/* Main question */}
         <div className="space-y-4">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-foreground leading-tight tracking-tight drop-shadow-lg">
-            WILL YOU ACCEPT MY LOVE
+            will you be my valentine 🧡
           </h1>
           <div className="flex justify-center gap-2">
             <Heart className="w-6 h-6 text-primary fill-primary animate-pulse" />

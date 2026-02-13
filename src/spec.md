@@ -1,10 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Use the two uploaded images as fixed, full-viewport background images on the Landing and Gratitude pages without breaking existing UI behavior or navigation.
+**Goal:** Let users edit and save the ReplyPage reply in-place, then navigate to a new Farewell page that shows a fixed parting message and auto-plays a 5-second kissing animation.
 
 **Planned changes:**
-- Update the Landing page to apply `/assets/3a6059bf59d32f6f27e0496b5424853a.jpg` as a full-page background (cover/center), fixed behind all existing content, preserving Yes/No layout and the No button’s evasive interactions.
-- Update the Gratitude page to apply `/assets/2fe29e3f61a6e53093c503c181238cdc.jpg` as a full-page background (cover/center) behind existing content, maintaining readability and layout.
+- Update ReplyPage reply box to start read-only with the persisted reply text, enter edit mode on click/tap, and provide a Save button at the bottom of the reply box that persists updates and shows a saving/disabled state while saving.
+- Add a Next button on ReplyPage that routes to a new fourth page without a full page reload.
+- Create a new fourth page that displays the provided parting message exactly as written and automatically plays a kissing-themed animation on open for 5 seconds, then stops/ends.
 
-**User-visible outcome:** The Landing and Gratitude pages display the uploaded photos as full-screen backgrounds while all current UI remains usable and the Landing → Gratitude flow continues to work.
+**User-visible outcome:** On the Reply page, the user can tap the reply text to edit it, save changes, and then press Next to reach a Farewell page that shows the exact parting message and plays a one-time 5-second kissing animation.
